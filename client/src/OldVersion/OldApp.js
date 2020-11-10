@@ -15,10 +15,14 @@ class OldApp extends React.Component {
     fetch("http://localhost:9000/getitems")
       .then((res) => res.json())
       .then((res) => {
-        const sortedActivities = res.sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
-        );
-        this.setState({ items: sortedActivities });
+        var value = [];
+        if (res.count() > 0) {
+          const sortedActivities = res.sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          );
+          value = sortedActivities;
+        }
+        this.setState({ items: value });
       });
   }
 
